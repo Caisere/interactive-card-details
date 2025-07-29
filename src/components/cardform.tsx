@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import type { CardInputTypes,CardUpdateProps } from "../constant/types";
 import {formatCardNumber, formatExpiry} from "../utils/helper";
+import CompleteState from "./completestate";
 
 
 const CardForm = ({
@@ -28,8 +29,8 @@ const CardForm = ({
 
     if (isSubmitted) {
         return (
-            <div className="text-center text-green-500">
-                <p>Card details updated successfully!</p>
+            <div className="text-center">
+                <CompleteState />
             </div>
         )
     }
