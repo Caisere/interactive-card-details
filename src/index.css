@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+
+@theme {
+    --color-tertiaryColor: hsl(0, 100%, 100%);
+    --color-primaryGray: hsl(270, 3%, 87%);
+    --color-secondaryGray: hsl(212, 12%, 71%);
+    --color-primaryPurple: hsl(278, 68%, 11%);
+    --color-errorRed: hsl(0, 100%, 66%);
+}
+
+@layer base {
+    body {
+        color: var(--color-primaryPurple)
+    }
+}
+
+
+@layer components {
+    input {
+        border-color: var(--color-secondaryGray);
+    
+        &::placeholder {
+            color: var(--color-secondaryGray)
+        }
+    }
+
+    
+}
