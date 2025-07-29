@@ -13,9 +13,12 @@ const CardForm = ({
     isSubmitted,
     setIsSubmitted
 }:CardUpdateProps) => {
-    const {register, handleSubmit, formState: {errors}, setValue, reset} = useForm<CardInputTypes>()
+    const {register, handleSubmit, formState: {errors, isSubmitting}, setValue, reset} = useForm<CardInputTypes>()
 
-    function onSubmit(data:CardInputTypes) {
+    async function onSubmit(data:CardInputTypes): Promise<void> {
+        // updating card details in 5 seconds after submission, to make is look like a real submission
+        await new Promise((resolve) => setTimeout(resolve, 5000))
+
         console.log("Form submitted:", data);
         // updating card details
         setCardHolderName(data.cardHolderName);
@@ -24,6 +27,8 @@ const CardForm = ({
         setExpiryYear(data.expiryYear);
         setCvv(data.cvv);
         setIsSubmitted?.(true)
+
+        // reset the form after submission
         reset();
     }
 
@@ -39,12 +44,13 @@ const CardForm = ({
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full max-w-md mx-auto p-4">
             {/* card holder name */}
             <div className="space-y-2">
-                <label htmlFor="cardHolderName" className="block text-sm font-medium">
+                <label htmlFor="cardHolderName" className="block text-sm font-semibold">
                     CardHolder Name
                 </label>
                 <input
                     id="cardHolderName"
                     type="text"
+                    disabled={isSubmitting}
                     placeholder="e.g. Omoshola Elegbede"
                     className="border rounded p-2 w-full"
                     {...register("cardHolderName", {
@@ -58,12 +64,13 @@ const CardForm = ({
 
             {/* Card Number */}
             <div className="space-y-2">
-                <label htmlFor="cardNumber" className="block text-sm font-medium">
+                <label htmlFor="cardNumber" className="block text-sm font-semibold">
                     Card Number
                 </label>
                 <input
                     id="cardNumber"
                     type="text"
+                    disabled={isSubmitting}
                     placeholder="e.g. 1243 8986 5646 9976"
                     className="border rounded p-2 w-full"
                     {...register("cardNumber", {
@@ -86,13 +93,14 @@ const CardForm = ({
                 {/* MM */}
                 <div className="flex gap-4 items-center w-full">
                     <div className="flex-1 flex flex-col space-y-2">
-                        <h3 className="text-sm font-medium">Expiry Date (MM/YY)</h3>
+                        <h3 className="text-sm font-semibold">Expiry Date (MM/YY)</h3>
                         <div className="flex gap-3">
                             <div className="flex flex-col">
                                 <input
                                     id="expiryMonth"
                                     type="text"
                                     placeholder="MM"
+                                    disabled={isSubmitting}
                                     className="border rounded p-2 w-full"
                                     {...register("expiryMonth", {
                                         required: "Month is required",
@@ -116,6 +124,7 @@ const CardForm = ({
                                     id="expiryYear"
                                     type="text"
                                     placeholder="YY"
+                                    disabled={isSubmitting}
                                     className="border rounded p-2 w-full"
                                     {...register("expiryYear", {
                                         required: "Year is required",
@@ -136,7 +145,7 @@ const CardForm = ({
 
                     {/* CVV */}
                     <div className="flex-1 space-y-2">
-                        <label htmlFor="cvv" className="block text-sm font-medium">
+                        <label htmlFor="cvv" className="block text-sm font-semibold">
                             CVV
                         </label>
                         <input
@@ -144,6 +153,7 @@ const CardForm = ({
                             type="text"
                             placeholder="123"
                             className="border rounded p-2 w-full"
+                            disabled={isSubmitting}
                             {...register("cvv", {
                                 required: "CVV is required",
                                 validate: (value) =>
@@ -159,10 +169,11 @@ const CardForm = ({
 
             <div className="flex justify-center w-full">
                 <button
+                    disabled={isSubmitting}
                     type="submit"
                     className="bg-primaryPurple text-primaryGray p-2 rounded hover:bg-primaryPurple/85 w-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    Confirm
+                    {isSubmitting ? "Submitting..." : "Confirm"}
                 </button>
             </div>
         </form>

@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
 
 @theme {
     --color-tertiaryColor: hsl(0, 100%, 100%);
@@ -10,7 +12,8 @@
 
 @layer base {
     body {
-        color: var(--color-primaryPurple)
+        color: var(--color-primaryPurple);
+        font-family: "Space Grotesk", sans-serif;
     }
 }
 
