@@ -14,6 +14,14 @@ import type { CardInputTypes, CardUpdateProps } from "../constant/types";
 import {formatCardNumber, formatExpiry} from "../utils/helper";
 
 
+
+// JSDoc
+/**
+ * CardForm component for handling card details input and submission.
+ * @param {CardUpdateProps} props - Props containing card details setters and submission state.
+ * The rendered CardForm component.
+ */
+
 const CardForm = ({
     setCardHolderName,
     setCardNumber,

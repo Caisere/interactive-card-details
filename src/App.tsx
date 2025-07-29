@@ -10,6 +10,11 @@ import CreditCard from "./components/creditcard"
 import { Avatar, AvatarFallback, AvatarImage } from './components/ui/avatar';
 
 
+//JSDoc
+/** * App component that renders the main application layout.
+ * It includes a credit card display and a form for entering card details.
+ *  The rendered App component.
+ */
 
 function App() {
     const [cardHolderName, setCardHolderName] = useState<string>("")

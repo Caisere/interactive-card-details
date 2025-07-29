@@ -1,5 +1,11 @@
+
 import { Check } from "lucide-react";
 import { Button } from "./ui/button";
+
+// JSDoc
+/** * CompleteState component to display a thank you message after form submission.
+ * The rendered CompleteState component.
+ */
 
 const CompleteState = () => {
     return (
