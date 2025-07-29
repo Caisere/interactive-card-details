@@ -1,4 +1,5 @@
-import {Check} from "lucide-react";
+import { Check } from "lucide-react";
+import { Button } from "./ui/button";
 
 const CompleteState = () => {
     return (
@@ -7,9 +8,9 @@ const CompleteState = () => {
             <h1 className="uppercase font-semibold text-3xl tracking-widest">Thank You!</h1>
             <p className="text-sm tracking-widest text-secondaryGray">We've added your card details</p>
 
-            <button className="bg-primaryPurple text-white px-4 py-2 rounded mt-4 hover:bg-primaryPurple/85 transition-all duration-200 w-full">
+            <Button className="bg-primaryPurple text-white px-4 py-2 rounded mt-4 hover:bg-primaryPurple/85 transition-all duration-200 w-full">
                 Continue
-            </button>
+            </Button>
         </main>
     )
 }

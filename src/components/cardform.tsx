@@ -1,7 +1,17 @@
+// react hook form
 import { useForm } from "react-hook-form";
-import type { CardInputTypes,CardUpdateProps } from "../constant/types";
-import {formatCardNumber, formatExpiry} from "../utils/helper";
+
+//ui components
 import CompleteState from "./completestate";
+import { Button } from "./ui/button";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+
+// types
+import type { CardInputTypes, CardUpdateProps } from "../constant/types";
+
+// utility functions
+import {formatCardNumber, formatExpiry} from "../utils/helper";
 
 
 const CardForm = ({
@@ -44,15 +54,16 @@ const CardForm = ({
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full max-w-md mx-auto p-4">
             {/* card holder name */}
             <div className="space-y-2">
-                <label htmlFor="cardHolderName" className="block text-sm font-semibold">
+                <Label htmlFor="cardHolderName" className="block text-sm font-semibold">
                     CardHolder Name
-                </label>
-                <input
+                </Label>
+                <Input
                     id="cardHolderName"
+                    autoComplete="name"
                     type="text"
                     disabled={isSubmitting}
                     placeholder="e.g. Omoshola Elegbede"
-                    className="border rounded p-2 w-full"
+                    className="border rounded w-full"
                     {...register("cardHolderName", {
                         required: "Full name is required"
                     })}
@@ -64,15 +75,16 @@ const CardForm = ({
 
             {/* Card Number */}
             <div className="space-y-2">
-                <label htmlFor="cardNumber" className="block text-sm font-semibold">
+                <Label htmlFor="cardNumber" className="block text-sm font-semibold">
                     Card Number
-                </label>
-                <input
+                </Label>
+                <Input
                     id="cardNumber"
                     type="text"
+                    autoComplete="true"
                     disabled={isSubmitting}
                     placeholder="e.g. 1243 8986 5646 9976"
-                    className="border rounded p-2 w-full"
+                    className="border rounded w-full"
                     {...register("cardNumber", {
                         required: "Card number is required",
                         validate: (value) =>
@@ -96,12 +108,13 @@ const CardForm = ({
                         <h3 className="text-sm font-semibold">Expiry Date (MM/YY)</h3>
                         <div className="flex gap-3">
                             <div className="flex flex-col">
-                                <input
+                                <Input
                                     id="expiryMonth"
                                     type="text"
+                                    autoComplete="month"
                                     placeholder="MM"
                                     disabled={isSubmitting}
-                                    className="border rounded p-2 w-full"
+                                    className="border rounded w-full"
                                     {...register("expiryMonth", {
                                         required: "Month is required",
                                         validate: (value) =>
@@ -120,12 +133,13 @@ const CardForm = ({
 
                             {/* YY */}
                             <div className="">
-                                <input
+                                <Input
                                     id="expiryYear"
                                     type="text"
+                                    autoComplete="year"
                                     placeholder="YY"
                                     disabled={isSubmitting}
-                                    className="border rounded p-2 w-full"
+                                    className="border rounded w-full"
                                     {...register("expiryYear", {
                                         required: "Year is required",
                                         validate: (value) => value.length === 2 || "Must be 2 digits",
@@ -145,19 +159,20 @@ const CardForm = ({
 
                     {/* CVV */}
                     <div className="flex-1 space-y-2">
-                        <label htmlFor="cvv" className="block text-sm font-semibold">
+                        <Label htmlFor="cvv" className="block text-sm font-semibold">
                             CVV
-                        </label>
-                        <input
+                        </Label>
+                        <Input
                             id="cvv"
+                            autoComplete="cc-csc"
                             type="text"
                             placeholder="123"
-                            className="border rounded p-2 w-full"
+                            className="border rounded w-full"
                             disabled={isSubmitting}
                             {...register("cvv", {
                                 required: "CVV is required",
                                 validate: (value) =>
-                                    [3, 4].includes(value.length) || "Must be 3-4 digits",
+                                    [3].includes(value.length) || "Must be 3 digits",
                             })}
                             maxLength={3}
                         />
@@ -168,13 +183,13 @@ const CardForm = ({
                 </div>
 
             <div className="flex justify-center w-full">
-                <button
+                <Button
                     disabled={isSubmitting}
                     type="submit"
-                    className="bg-primaryPurple text-primaryGray p-2 rounded hover:bg-primaryPurple/85 w-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="bg-primaryPurple text-primaryGray rounded hover:bg-primaryPurple/85 w-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {isSubmitting ? "Submitting..." : "Confirm"}
-                </button>
+                </Button>
             </div>
         </form>
     );
