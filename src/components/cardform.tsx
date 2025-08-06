@@ -12,6 +12,8 @@ import type { CardInputTypes, CardUpdateProps } from "../constant/types";
 
 // utility functions
 import {formatCardNumber, formatExpiry} from "../utils/helper";
+import { useEffect } from "react";
+
 
 
 
@@ -31,12 +33,13 @@ const CardForm = ({
     isSubmitted,
     setIsSubmitted
 }:CardUpdateProps) => {
-    const {register, handleSubmit, formState: {errors, isSubmitting}, setValue, reset} = useForm<CardInputTypes>()
+    const {register, handleSubmit, formState: {errors, isSubmitting}, setValue, reset, setFocus} = useForm<CardInputTypes>()
 
+    // handle form submit function
     async function onSubmit(data:CardInputTypes): Promise<void> {
         // updating card details in 5 seconds after submission, to make is look like a real submission
         await new Promise((resolve) => setTimeout(resolve, 5000))
-
+        
         console.log("Form submitted:", data);
         // updating card details
         setCardHolderName(data.cardHolderName);
@@ -45,11 +48,18 @@ const CardForm = ({
         setExpiryYear(data.expiryYear);
         setCvv(data.cvv);
         setIsSubmitted?.(true)
-
+        
         // reset the form after submission
         reset();
     }
 
+    // auto focus on the CardHolderName on page load
+    useEffect(() => {
+        setFocus('cardHolderName')
+    }, [setFocus])
+
+
+    // UI after form submission
     if (isSubmitted) {
         return (
             <div className="text-center">
