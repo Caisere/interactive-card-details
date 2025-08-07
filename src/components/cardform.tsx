@@ -8,13 +8,11 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 
 // types
-import type { CardInputTypes, CardUpdateProps } from "../constant/types";
+import type { CardInputTypes, CardUpdateProps } from "@/types";
 
 // utility functions
 import {formatCardNumber, formatExpiry} from "../utils/helper";
 import { useEffect } from "react";
-
-
 
 
 // JSDoc
@@ -35,7 +33,7 @@ const CardForm = ({
 }:CardUpdateProps) => {
     const {register, handleSubmit, formState: {errors, isSubmitting}, setValue, reset, setFocus} = useForm<CardInputTypes>()
 
-    // handle form submit function
+    // handle form submit funci
     async function onSubmit(data:CardInputTypes): Promise<void> {
         // updating card details in 5 seconds after submission, to make is look like a real submission
         await new Promise((resolve) => setTimeout(resolve, 5000))

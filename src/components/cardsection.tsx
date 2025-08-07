@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { formatCardNumber } from "../utils/helper";
-import type { CardInputTypes } from '@/constant/types';
+import type { CardInputTypes } from '@/types';
 
 function CardSection ({expiryMonth, cvv, expiryYear, cardHolderName, cardNumber}:CardInputTypes) {
     return <>

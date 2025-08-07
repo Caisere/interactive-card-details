@@ -1,6 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
 
-export type CardInputTypes = {
+
+type CardInputTypes = {
     cardHolderName: string
     cardNumber: string,
     expiryMonth: string;
@@ -8,7 +9,7 @@ export type CardInputTypes = {
     cvv: string;
 }
 
-export type CardUpdateProps = {
+type CardUpdateProps = {
     setCardHolderName: Dispatch<SetStateAction<string>>;
     setCardNumber: Dispatch<SetStateAction<string>>;
     setExpiryMonth: Dispatch<SetStateAction<string>>;
@@ -17,3 +18,5 @@ export type CardUpdateProps = {
     isSubmitted?: boolean;
     setIsSubmitted?: Dispatch<SetStateAction<boolean>>;
 }
+
+export {CardInputTypes, CardUpdateProps}
